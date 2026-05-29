@@ -1,0 +1,70 @@
+{
+  "name": "lineage2-warders-launcher",
+  "version": "1.0.0",
+  "description": "Lanzador con actualización automática para Lineage 2 Warders",
+  "main": "public/electron.js",
+  "homepage": "./",
+  "author": "Hilacha10",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "axios": "^1.6.0",
+    "crypto": "^1.0.1"
+  },
+  "devDependencies": {
+    "electron": "^latest",
+    "electron-builder": "^24.6.3",
+    "electron-updater": "^6.1.1",
+    "concurrently": "^8.2.2",
+    "wait-on": "^7.0.1"
+  },
+  "scripts": {
+    "react-start": "react-scripts start",
+    "react-build": "react-scripts build",
+    "electron-start": "wait-on http://localhost:3000 && electron .",
+    "dev": "concurrently \"npm run react-start\" \"npm run electron-start\"",
+    "build": "npm run react-build && electron-builder",
+    "build:win": "npm run react-build && electron-builder --win",
+    "build:mac": "npm run react-build && electron-builder --mac",
+    "build:linux": "npm run react-build && electron-builder --linux"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "build": {
+    "appId": "com.warders.launcher",
+    "productName": "Lineage 2 Warders Launcher",
+    "files": [
+      "build/**/*",
+      "public/electron.js",
+      "public/preload.js",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  }
+}
